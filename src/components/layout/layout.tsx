@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { layoutProps } from '../../types/components'
+import { LayoutProps } from '../../types/components'
 
-export default function Layout({ children, pageTitle, description, previewImage, siteName, ...props }: layoutProps) {
+export default function Layout({ children, pageTitle, description, previewImage, siteName, ...props }: LayoutProps) {
   return (
     <>
       <Head>

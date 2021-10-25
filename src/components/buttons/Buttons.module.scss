@@ -1,0 +1,43 @@
+@import '../../shared/theme.scss';
+.image-wrapper{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    position: relative;
+    box-shadow: $BUTTON_SHADOW;
+    &.pink{
+        background-color: $PINK;
+    }
+    &.yellow{
+        background-color: $YELLOW;
+    }
+    &.white{
+        background-color: $WHITE;
+    }
+    &.black{
+        background-color: $BLACK;
+    }
+    .image-container{
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: $WHITE;
+    border: 1px solid $PINK;
+    border-radius: 8px;
+    color: $PINK;
+    transition: .2s ease;
+    &:hover{
+        background-color: $PINK_H
+    }
+}

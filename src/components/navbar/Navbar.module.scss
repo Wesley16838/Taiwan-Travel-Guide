@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0px 108px 18px 108px;
+    height: 104px;
+    .links-group{
+        width: 306px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

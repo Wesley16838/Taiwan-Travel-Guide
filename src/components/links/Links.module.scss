@@ -1,0 +1,37 @@
+@import '../../shared/theme.scss';
+
+.link{
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+    &.pink{
+        color: $PINK;
+        &::before{
+            background-image: url('../../../public/attraction_icon.png');
+        }
+    }
+    &.yellow{
+        color: $YELLOW;
+        &::before{
+            background-image: url('../../../public/food_live_icon.png');
+        }
+    }
+    &.green{
+        color: $GREEN;
+        &::before{
+            background-image: url('../../../public/transportation_icon.png');
+        }
+    }
+    &.pink, &.yellow, &.green{
+        &::before{
+            width: 34px;
+            height: 34px;
+            content: " ";
+            background-size: cover;
+            position: absolute;
+            left: -40px;
+            top: -12px;
+            pointer-events: none;
+        }
+    }
+}

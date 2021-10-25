@@ -1,0 +1,119 @@
+@import '../../shared/theme.scss';
+.image-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    z-index: 1;
+    .image-shadow{
+        position: absolute;
+        left: 0;
+        top:  0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    .name{
+        position: absolute;
+        left: 50%;
+        top:  50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 3;
+    }
+    p{
+        margin: 0px;
+        color: $WHITE;
+    }
+}
+
+.container{
+    &__small{
+        width: 518px;
+        height: 228px;
+        padding: 16px;
+    }
+    &__medium{
+        height: 228px;
+        padding: 16px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        background-color: $WHITE;
+        position: relative;
+        &:before, &:after{
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 45px;
+            background-size: cover;
+            background-position-y: bottom;
+            z-index: -1;
+            top: 215px;
+        }
+        &:before{
+            left: -3px;
+            background-image: url('/left_triangle_m.png');
+        }
+        &:after{
+            right: -3px;
+            background-image: url('/right_triangle_m.png');
+        }
+        .information{
+            margin-left: 16px;
+            display: grid;
+            column-gap: 14px;
+            width: calc(100% - 187px);
+            .title{
+                font-size: $MEDIUM;
+                font-weight: $REGULAR;
+                line-height: 23px;
+                margin: 0px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .detail{
+                height: 102px;
+                color: $GRAY;
+                font-size: $MEDIUM_SMALL;
+                font-weight: $REGULAR;
+                margin: 14px 0px;
+            }
+            .location{
+                width: 120px;
+                height: 40px;
+                line-height: 40px;
+                font-size: $MEDIUM_SMALL;
+                font-weight: $REGULAR;
+                margin: 0px;
+                position: relative;
+                padding-left: 32px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    background-image: url('/location_icon_pink.png');
+                    width: 24px;
+                    height: 24px;
+                    background-size: cover;
+                    left: 0px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+            .footer{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .button-container{
+                    width: 120px;
+                    height: 40px;
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { linkProps } from '../../types/components'
-
-const Links = ({path, name}: linkProps) => {
+import { LinkProps } from '../../types/components'
+import styles from './Links.module.scss'
+const Links = ({path, name, color}: LinkProps) => {
     return(
         <Link href={path}>
-            <a>{name}</a>
+            <a className={`${styles.link} ${color && styles[color]}`}>{name}</a>
         </Link>
     )
 }
