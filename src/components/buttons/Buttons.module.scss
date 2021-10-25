@@ -36,8 +36,12 @@
     border: 1px solid $PINK;
     border-radius: 8px;
     color: $PINK;
-    transition: .2s ease;
+    transition: $TRANSITION;
     &:hover{
         background-color: $PINK_H
+    }
+    &:active{
+        background-color: $PINK;
+        color: $WHITE;
     }
 }

@@ -25,7 +25,9 @@ input{
 }
 
 section{
-  padding: 0px 108px;
+  width: 1065px;
+  margin: 0 auto;
+  /* padding: 0px 108px; */
 }
 
 section article{

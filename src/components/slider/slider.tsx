@@ -19,25 +19,25 @@ const Slider = ({data}: SliderProps) => {
         <div className={styles.container}>
             {index === 1 && <div className={`${styles['button-container']} ${styles['previous']}`}><Buttons backgroundColor={'white'} onClick={()=>handleOnClick(0)} imagePath={previousIcon} type={'image'}/></div>}
             <div className={styles['item-one']}>
-                <Card type={"image"} name={data[index*6+0].label} imagePath={data[index*6+0].image} onClick={() => handleOnClickCard(data[index*6+0].value)}/>
+                <Card type={"image"} name={data[index*7+0].label} imagePath={data[index*7+0].image} onClick={() => handleOnClickCard(data[index*6+0].value)}/>
             </div>
             <div className={styles['item-two']}>
-                <Card type={"image"} name={data[index*6+1].label} imagePath={data[index*6+1].image} onClick={() => handleOnClickCard(data[index*6+1].value)}/>
+                <Card type={"image"} name={data[index*7+1].label} imagePath={data[index*7+1].image} onClick={() => handleOnClickCard(data[index*6+1].value)}/>
             </div>
             <div className={styles['item-three']}>
-                <Card type={"image"} name={data[index*6+2].label} imagePath={data[index*6+2].image} onClick={() => handleOnClickCard(data[index*6+2].value)}/>
+                <Card type={"image"} name={data[index*7+2].label} imagePath={data[index*7+2].image} onClick={() => handleOnClickCard(data[index*6+2].value)}/>
             </div>
             <div className={styles['item-four']}>
-                <Card type={"image"} name={data[index*6+3].label} imagePath={data[index*6+3].image} onClick={() => handleOnClickCard(data[index*6+3].value)}/>
+                <Card type={"image"} name={data[index*7+3].label} imagePath={data[index*7+3].image} onClick={() => handleOnClickCard(data[index*6+3].value)}/>
             </div>
             <div className={styles['item-five']}>
-                <Card type={"image"} name={data[index*6+4].label} imagePath={data[index*6+4].image} onClick={() => handleOnClickCard(data[index*6+4].value)}/>
+                <Card type={"image"} name={data[index*7+4].label} imagePath={data[index*7+4].image} onClick={() => handleOnClickCard(data[index*6+4].value)}/>
             </div>
             <div className={styles['item-six']}>
-                <Card type={"image"} name={data[index*6+5].label} imagePath={data[index*6+5].image} onClick={() => handleOnClickCard(data[index*6+5].value)}/>
+                <Card type={"image"} name={data[index*7+5].label} imagePath={data[index*7+5].image} onClick={() => handleOnClickCard(data[index*6+5].value)}/>
             </div>
             <div className={styles['item-seven']}>
-                <Card type={"image"} name={data[index*6+6].label} imagePath={data[index*6+6].image} onClick={() => handleOnClickCard(data[index*6+6].value)}/>
+                <Card type={"image"} name={data[index*7+6].label} imagePath={data[index*7+6].image} onClick={() => handleOnClickCard(data[index*6+6].value)}/>
             </div>
             {index === 0 && <div className={`${styles['button-container']} ${styles['next']}`}><Buttons backgroundColor={'black'} onClick={()=>handleOnClick(1)} imagePath={nextIcon} type={'image'}/></div>} 
         </div>
