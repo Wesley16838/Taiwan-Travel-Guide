@@ -47,6 +47,11 @@
         justify-content: flex-start;
         background-color: $WHITE;
         position: relative;
+        transition: $TRANSITION;
+        top: 0px;
+        &:hover{
+            top: -10px
+        }
         &:before, &:after{
             content: "";
             position: absolute;
@@ -59,11 +64,11 @@
         }
         &:before{
             left: -2px;
-            background-image: url('/left_triangle_m.png');
+            background-image: url('/images/left_triangle_m.png');
         }
         &:after{
             right: -2px;
-            background-image: url('/right_triangle_m.png');
+            background-image: url('/images/right_triangle_m.png');
         }
         .image-container{
             width: 182px;
@@ -87,7 +92,7 @@
             &:before{
                 content: "";
                 position: absolute;
-                background-image: url('/location_icon_pink.png');
+                background-image: url('/images/location_icon_pink.png');
                 width:16px;
                 height: 16px;
                 background-size: cover;
@@ -125,11 +130,11 @@
         }
         &:before{
             left: -3px;
-            background-image: url('/left_triangle_m.png');
+            background-image: url('/images/left_triangle_m.png');
         }
         &:after{
             right: -3px;
-            background-image: url('/right_triangle_m.png');
+            background-image: url('/images/right_triangle_m.png');
         }
         .image-container{
             width:187px;
@@ -171,7 +176,7 @@
                 &:before{
                     content: "";
                     position: absolute;
-                    background-image: url('/location_icon_pink.png');
+                    background-image: url('/images/location_icon_pink.png');
                     width: 24px;
                     height: 24px;
                     background-size: cover;
@@ -208,11 +213,11 @@
             }
             &:before{
                 left: -3px;
-                background-image: url('/left_triangle_m.png');
+                background-image: url('/images/left_triangle_m.png');
             }
             &:after{
                 right: -3px;
-                background-image: url('/right_triangle_m.png');
+                background-image: url('/images/right_triangle_m.png');
             }
             .image-container{
                 width: 100%;

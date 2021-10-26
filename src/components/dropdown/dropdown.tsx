@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { DropDownProps, DataItemType } from '../../types/components'
 import styles from './Dropdown.module.scss'
-import dropdownIcon from '../../../public/dropdown_icon.png'
+import dropdownIcon from '../../../public/images/dropdown_icon.png'
 const Dropdowns = ({data, onClick, type}: DropDownProps) => {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState('');

@@ -1,6 +1,6 @@
 import Links from '../links/links'
 import Image from 'next/image'
-import logoPic from '../../../public/logo.png'
+import logoPic from '../../../public/images/logo.png'
 import styles from './Navbar.module.scss'
 const Navbar = () => {
     return(

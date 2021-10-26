@@ -32,7 +32,7 @@
             transform: translateY(-50%);
             width: 20px;
             height: 16px;
-            background-image: url('/triangle.png');
+            background-image: url('/images/triangle.png');
             background-size: cover;
         }
     }
@@ -41,7 +41,7 @@
             &:before{
                 width: 20px;
                 height: 20px;
-                background-image: url('/square.png');
+                background-image: url('/images/square.png');
             }
         }
     }

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { CardProps } from '../../types/components'
 import Buttons from '../buttons/buttons'
 import styles from './Card.module.scss'
-import locationIcon from '../../../public/location_icon_no_circle.png'
+import locationIcon from '../../../public/images/location_icon_no_circle.png'
 const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: CardProps) => {
     if(type === "image"){
         const handleOnImageOnclick = () => {

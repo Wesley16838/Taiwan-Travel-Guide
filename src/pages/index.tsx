@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   } 
 
   return (
-    <Layout>
+    <Layout pageTitle={'首頁'} description={"全台觀光景點報你知，交通餐飲旅宿通通有！"}>
       <Header/>
       <section>
         <article className={styles['page-article']}>
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
                       name={activity.Name} 
                       description={activity.Description} 
                       location={activity.Location} 
-                      imagePath={Object.keys(activity.Picture).length !== 0 ? activity.Picture.PictureUrl1 : "/no_image_available.png"} 
+                      imagePath={Object.keys(activity.Picture).length !== 0 ? activity.Picture.PictureUrl1 : "/images/no_image_available.png"} 
                       imageAlt={Object.keys(activity.Picture).length !== 0 ? activity.Picture.PictureDescription1 : "Activity Image"}
                     />
                   )
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
                       name={food.Name} 
                       description={food.Description} 
                       location={food.Address} 
-                      imagePath={Object.keys(food.Picture).length !== 0 ? food.Picture.PictureUrl1 : "/no_image_available.png"} 
+                      imagePath={Object.keys(food.Picture).length !== 0 ? food.Picture.PictureUrl1 : "/images/no_image_available.png"} 
                       imageAlt={Object.keys(food.Picture).length !== 0 ? food.Picture.PictureDescription1 : "Activity Image"}
                     />
                   )

@@ -99,72 +99,72 @@ export const HotCitiesData = [
     {
         value: 'Taipei',
         label: '台北',
-        image: '/taipei.png'
+        image: '/images/taipei.png'
     },
     {
         value: 'NewTaipei',
         label: '新北',
-        image: '/newtaipei.png'
+        image: '/images/newtaipei.png'
     },
     {
         value: 'Taoyuan',
         label: '桃園',
-        image: '/taoyuan.png'
+        image: '/images/taoyuan.png'
     },
     {
         value: 'Hsinchu',
         label: '新竹',
-        image: '/hsinchu.png'
+        image: '/images/hsinchu.png'
     },
     {
         value: 'Taichung',
         label: '台中',
-        image: '/taichung.png'
+        image: '/images/taichung.png'
     },
     {
         value: 'NantouCounty',
         label: '南投',
-        image: '/nantou.png'
+        image: '/images/nantou.png'
     },
     {
         value: 'Chiayi',
         label: '嘉義',
-        image: '/chiayi.png'
+        image: '/images/chiayi.png'
     },
     {
         value: 'Tainan',
         label: '台南',
-        image: '/tainan.png'
+        image: '/images/tainan.png'
     },
     {
         value: 'Kaohsiung',
         label: '高雄',
-        image: '/kaohsiung.png'
+        image: '/images/kaohsiung.png'
     },
     {
         value: 'PingtungCounty',
         label: '屏東',
-        image: '/pingtung.png'
+        image: '/images/pingtung.png'
     },
     {
         value: 'YilanCounty',
         label: '宜蘭',
-        image: '/yilan.png'
+        image: '/images/yilan.png'
     },
     {
         value: 'HualienCounty',
         label: '花蓮',
-        image: '/hualien.png'
+        image: '/images/hualien.png'
     },
     {
         value: 'TaitungCounty',
         label: '台東',
-        image: '/taitung.png'
+        image: '/images/taitung.png'
     },
     {
         value: 'KinmenCounty PenghuCounty LienchiangCounty',
         label: '金門媽祖,澎湖',
-        image: '/kpl.png'
+        image: '/images/kpl.png'
     },
 ]
 

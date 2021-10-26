@@ -7,19 +7,19 @@
     &.pink{
         color: $PINK;
         &::before{
-            background-image: url('../../../public/attraction_icon.png');
+            background-image: url('/images/attraction_icon.png');
         }
     }
     &.yellow{
         color: $YELLOW;
         &::before{
-            background-image: url('../../../public/food_live_icon.png');
+            background-image: url('/images/food_live_icon.png');
         }
     }
     &.green{
         color: $GREEN;
         &::before{
-            background-image: url('../../../public/transportation_icon.png');
+            background-image: url('/images/transportation_icon.png');
         }
     }
     &.pink, &.yellow, &.green{

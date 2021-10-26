@@ -3,8 +3,8 @@ import Buttons from '../buttons/buttons'
 import styles from './Slider.module.scss'
 import { SliderProps } from '../../types/components'
 import { useState } from 'react'
-import previousIcon from '../../../public/previous_icon.png'
-import nextIcon from '../../../public/next_icon.png'
+import previousIcon from '../../../public/images/previous_icon.png'
+import nextIcon from '../../../public/images/next_icon.png'
 const Slider = ({data}: SliderProps) => {
     const [index, setIndex] = useState(0);
 
