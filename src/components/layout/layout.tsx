@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { LayoutProps } from '../../types/components'
-
+import Navbar from '../navbar/navbar'
+import Footer from '../footer/footer'
+// add nav and footer
 export default function Layout({ children, pageTitle, description, previewImage, siteName, ...props }: LayoutProps) {
   return (
     <>
@@ -15,7 +17,9 @@ export default function Layout({ children, pageTitle, description, previewImage,
 +       <meta property="og:description" content={description} key="ogdesc" />
         <title>{pageTitle}</title>
       </Head>
-      {children}
+      <Navbar/>
+        {children}
+      <Footer/>
     </>
   )
 }

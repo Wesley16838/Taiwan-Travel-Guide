@@ -7,6 +7,13 @@
         column-gap: 48px;
         row-gap: 39px;
     }
+    .food-wrapper{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        row-gap: 27px;
+        column-gap: 9px;
+        margin-bottom: 77px;
+    }
     h2{
         font-size: $MEDIUM_LARGE;
         font-weight: $REGULAR;

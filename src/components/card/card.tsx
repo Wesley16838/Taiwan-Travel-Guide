@@ -25,21 +25,27 @@ const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: 
 
     return(
         <div className={`${styles[`container__${type}`]}`}>
-            <Image src={imagePath} alt={imageAlt} width={187} height={196} />
+            <div className={styles['image-container']}>
+                <Image src={imagePath} alt={imageAlt} layout={'fill'}/>
+            </div>
             <div className={styles.information}>
                 <h3 className={styles.title}>
                     {name}
                 </h3>
-                <p className={styles.detail}>
-                    {description && description.length > 96 ? description.slice(0, 90)+'...': description}
-                </p>
+                {type === 'medium' &&
+                    <p className={styles.detail}>
+                        {description && description.length > 96 ? description.slice(0, 90)+'...': description}
+                    </p>
+                }
                 <div className={styles.footer}>
                     <p className={styles.location}>
                         {location}
                     </p>
-                    <div className={styles['button-container']}>
-                        <Buttons title={'活動詳情'} onClick={() => handleOnClick()}/>
-                    </div>
+                    {type === 'medium' &&
+                        <div className={styles['button-container']}>
+                            <Buttons title={'活動詳情'} onClick={() => handleOnClick()}/>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

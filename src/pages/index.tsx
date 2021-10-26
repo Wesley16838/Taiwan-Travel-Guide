@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Layout from '../components/layout/layout'
-import Navbar from '../components/navbar/navbar'
 import Header from '../components/header/header'
 import Slider from '../components/slider/slider'
 import Card from '../components/card/card'
@@ -12,7 +11,7 @@ import { FoodMockData, ActivityMockData } from '../constants/mock-data'
 
 const Home: NextPage = () => {
   const [activities, setActivities] = useState<any[]>([])
-  const [food, setFood] = useState<any[]>([])
+  const [foods, setFood] = useState<any[]>([])
 
   useEffect(() => {
     setFood(FoodMockData)
@@ -25,7 +24,6 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <Navbar/>
       <Header/>
       <section>
         <article className={styles['page-article']}>
@@ -48,7 +46,7 @@ const Home: NextPage = () => {
                       name={activity.Name} 
                       description={activity.Description} 
                       location={activity.Location} 
-                      imagePath={Object.keys(activity.Picture).length !== 0 ? activity.Picture.PictureUrl1 : "/no_image.png"} 
+                      imagePath={Object.keys(activity.Picture).length !== 0 ? activity.Picture.PictureUrl1 : "/no_image_available.png"} 
                       imageAlt={Object.keys(activity.Picture).length !== 0 ? activity.Picture.PictureDescription1 : "Activity Image"}
                     />
                   )
@@ -60,6 +58,24 @@ const Home: NextPage = () => {
         <article className={styles['page-article']}>
           <div className={styles.topic}>
             <h2>熱門餐飲</h2>
+            <div className={styles['food-wrapper']}>
+              {
+                foods.map(food => {
+                  return(
+                    <Card 
+                      key={food.Name}
+                      onClick={() => handleOnCardClick()} 
+                      type={'small'} 
+                      name={food.Name} 
+                      description={food.Description} 
+                      location={food.Address} 
+                      imagePath={Object.keys(food.Picture).length !== 0 ? food.Picture.PictureUrl1 : "/no_image_available.png"} 
+                      imageAlt={Object.keys(food.Picture).length !== 0 ? food.Picture.PictureDescription1 : "Activity Image"}
+                    />
+                  )
+                })
+              }
+            </div>
           </div>
         </article>
       </section>

@@ -40,9 +40,68 @@
 
 .container{
     &__small{
-        width: 518px;
-        height: 228px;
-        padding: 16px;
+        height: 251px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: $WHITE;
+        position: relative;
+        &:before, &:after{
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 45px;
+            background-size: cover;
+            background-position-y: bottom;
+            z-index: -1;
+            top: 232px;
+        }
+        &:before{
+            left: -3px;
+            background-image: url('/left_triangle_m.png');
+        }
+        &:after{
+            right: -3px;
+            background-image: url('/right_triangle_m.png');
+        }
+        .image-container{
+            width: 100%;
+        }
+        .title{
+            font-size: $MEDIUM_SMALL;
+            font-weight: $REGULAR;
+            margin: 0px;
+        }
+        .location{
+            font-size: $SMALL;
+            font-weight: $THIN;
+            color: $GREEN;
+            margin: 0px;
+            padding-left: 18px;
+            position: relative;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            &:before{
+                content: "";
+                position: absolute;
+                background-image: url('/location_icon_pink.png');
+                width:16px;
+                height: 16px;
+                background-size: cover;
+                left: 0px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .information{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 69px;
+            margin-top: 10px;
+        }
     }
     &__medium{
         height: 228px;
@@ -69,6 +128,10 @@
         &:after{
             right: -3px;
             background-image: url('/right_triangle_m.png');
+        }
+        .image-container{
+            width:187px;
+            height:196px;
         }
         .information{
             margin-left: 16px;
