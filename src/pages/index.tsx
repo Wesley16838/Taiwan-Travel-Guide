@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   } 
 
   return (
-    <Layout pageTitle={'首頁'} description={"全台觀光景點報你知，交通餐飲旅宿通通有！"} previewImage={"/images/preview_image_homepage.png"}>
+    <Layout pageTitle={'台灣旅遊景點導覽 - 首頁'} description={"全台觀光景點報你知，交通餐飲旅宿通通有！"} previewImage={"/images/preview_image_homepage.png"}>
       <Header/>
       <section>
         <article className={styles['page-article']}>
