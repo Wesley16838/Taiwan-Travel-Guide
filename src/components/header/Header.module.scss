@@ -3,34 +3,27 @@
     height: 536px;
     padding: 23px 27px;
     position: relative;
+    margin-top: 104px;
     background-color: $WHITE;
-    &:before{
+    overflow-x: clip;
+    &:before, &:after{
         content: "";
         position: absolute;
         width: 680px;
         height: 52px;
-        left: -10px;
         top: 485px;
         background: $BLACK;
         opacity: 0.3;
-        /* shadow_blur */
         filter: blur(3px);
-        transform: rotate(-4deg);
         z-index: -1;
     }
+    &:before{
+        left: -10px;
+        transform: rotate(-4deg);
+    }
     &:after{
-        content: "";
-        position: absolute;
-        width: 680px;
-        height: 52px;
         right: -10px;
-        top: 485px;
-        background: $BLACK;
-        opacity: 0.3;
-        /* shadow_blur */
-        filter: blur(3px);
         transform: rotate(4deg);
-        z-index: -1;
     }
     .wrapper-background{
         width: 100%;

@@ -1,6 +1,21 @@
 @import '../../shared/theme.scss';
 .wrapper{
     background-color: $WHITE;
+    position: fixed;
+    top: 0px;
+    z-index: 10;
+    transition: 0.2s;
+    width: 100%;
+    &.small{
+        .container{
+            padding-bottom: 14px;
+            height: 60px;
+            .image-container{
+                width: 66px;
+                height: 36px;
+            }
+        }
+    }
     .container{
         display: flex;
         flex-direction: row;
@@ -11,6 +26,12 @@
         width: 1065px;
         height: 104px;
         background-color: $WHITE;
+        transition: 0.2s;
+        .image-container{
+            transition: 0.2s;
+            width: 99px;
+            height: 57px;
+        }
         .links-group{
             width: 306px;
             display: flex;
