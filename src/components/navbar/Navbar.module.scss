@@ -8,7 +8,7 @@
         justify-content: space-between;
         padding-bottom:18px;
         margin: auto;
-        width: 1312px;
+        width: 1065px;
         height: 104px;
         background-color: $WHITE;
         .links-group{
@@ -18,4 +18,12 @@
             justify-content: space-between;
         }
     }
+}
+
+@media (min-width: $BREAKPOINT_DOUBLE_EXTRA_LARGE) {
+  .wrapper{
+      .container{
+          width: 1312px;
+      }
+  }
 }
