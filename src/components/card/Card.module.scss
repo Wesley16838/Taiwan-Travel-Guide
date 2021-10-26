@@ -48,10 +48,7 @@
         background-color: $WHITE;
         position: relative;
         transition: $TRANSITION;
-        top: 0px;
-        &:hover{
-            top: -10px
-        }
+
         &:before, &:after{
             content: "";
             position: absolute;
