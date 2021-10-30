@@ -15,13 +15,14 @@ const Buttons = ({title, type, imagePath, imageAlt, backgroundColor, ariaLabel, 
                     <Image
                         src={imagePath}
                         alt={imageAlt}
+                        layout={'fill'}
                     />
                 </div>
             </button>
         )
     }
     return (
-        <button className={styles.wrapper}>
+        <button className={styles.wrapper} onClick={(e)=>handleOnClick(e)}>
             {title}
         </button>
     )

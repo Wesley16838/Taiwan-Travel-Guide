@@ -58,6 +58,20 @@ export type SliderProps = {
     data: HotCitiesType[]
 }
 
+export type ModalProps = {
+    show: boolean;
+    index: number;
+    imagePath: string;
+    imageAlt: string;
+    title: string; 
+    description: string; 
+    time: string; 
+    ticket: string;
+    location: string; 
+    phoneNumber: string;
+    onClick: any;
+    onCancel: any;
+}
 /** 
  * Type for single param in the props
 */

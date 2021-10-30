@@ -20,7 +20,7 @@ const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: 
     }
 
     const handleOnClick = () => {
-
+        if(onClick) onClick()
     }
 
     return(
@@ -28,7 +28,7 @@ const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: 
             <div className={styles['image-container']}>
                 <Image src={imagePath} alt={imageAlt} layout={'fill'}/>
             </div>
-            <div className={styles.information}>
+            <div className={styles.info}>
                 <h3 className={styles.title}>
                     {name}
                 </h3>
