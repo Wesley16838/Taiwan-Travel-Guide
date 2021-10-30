@@ -10,7 +10,9 @@ import { useEffect } from 'react'
 const Modal = ({show, index, title, description, time, ticket, location, phoneNumber, imagePath, imageAlt, onClick, onCancel}: ModalProps) => {
 
     useEffect(() => {
-        if(show)document.body.style.overflow = 'hidden'
+        if(show){
+            document.body.style.overflow = 'hidden'
+        }
         return (() => {
           document.body.style.overflow = 'unset'
         })

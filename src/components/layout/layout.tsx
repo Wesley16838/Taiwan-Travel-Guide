@@ -3,7 +3,7 @@ import { LayoutProps } from '../../types/components'
 import Navbar from '../navbar/navbar'
 import Footer from '../footer/footer'
 // add nav and footer
-export default function Layout({ children, pageTitle, description, previewImage, siteName, ...props }: LayoutProps) {
+export default function Layout({ children, pageTitle, description, previewImage, siteName, show }: LayoutProps) {
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ export default function Layout({ children, pageTitle, description, previewImage,
 +       <meta property="og:description" content={description} key="ogdesc" />
         <title>{pageTitle}</title>
       </Head>
-      <Navbar/>
+      <Navbar show={show}/>
         {children}
       <Footer/>
     </>

@@ -3,7 +3,8 @@ import Image from 'next/image'
 import logoPic from '../../../public/images/logo.png'
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react'
-const Navbar = () => {
+const Navbar = (props: any) => {
+    const {show} = props
     const [nav, setNav] = useState(false)
     const listenScrollEvent = () => {
         if (window.scrollY > 100) {
