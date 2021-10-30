@@ -19,7 +19,7 @@ const Home: NextPage = () => {
     index: 0,
     type: '',
     show:false,
-    target: {}
+    data: {}
   })
 
   useEffect(() => {
@@ -32,26 +32,26 @@ const Home: NextPage = () => {
       index: index,
       type: type,
       show: !showModal.show,
-      target: type === 'food' ? foods[index] : activities[index]
+      data: type === 'food' ? foods[index] : activities[index]
     })
   }
 
   return (
-    <Layout pageTitle={'台灣旅遊景點導覽 - 首頁'} description={"全台觀光景點報你知，交通餐飲旅宿通通有！"} previewImage={"/images/preview_image_homepage.png"} show={showModal.show}>
+    <Layout pageTitle={'台灣旅遊景點導覽 - 首頁'} description={"全台觀光景點報你知，交通餐飲旅宿通通有！"} previewImage={"/images/preview_image_homepage.png"}>
       {showModal.show && 
         <Modal 
           show={showModal.show}
           index={showModal.index} 
           onClick={(val: number) => handleOnCardClick(showModal.type, val)}
           onCancel={()=> setShowModal({...showModal, show: false})}
-          title={showModal.target.Name}
-          description={showModal.target.Description}
-          time={showModal.type === 'food' ? showModal.target.OpenTime : `${format(Date.parse(showModal.target.StartTime), 'yyyy/MM/dd')} - ${format(Date.parse(showModal.target.EndTime), 'yyyy/MM/dd')}`} 
-          ticket={showModal.type === 'food' ? '--' : `${showModal.target.Charge ? showModal.target.Charge : '--'}`}  
-          location={showModal.target.Location ? showModal.target.Location : showModal.target.Address}  
-          phoneNumber={showModal.target.Phone ? showModal.target.Phone : '--'} 
-          imagePath={showModal.target.Picture?.PictureUrl1 ? showModal.target.Picture.PictureUrl1 : "/images/no_image_available.png"}
-          imageAlt={showModal.target.Picture?.PictureDescription1 ? showModal.target.Picture?.PictureDescription1 : 'Modal Image'}
+          title={showModal.data.Name}
+          description={showModal.data.Description}
+          time={showModal.type === 'food' ? showModal.data.OpenTime : `${format(Date.parse(showModal.data.StartTime), 'yyyy/MM/dd')} - ${format(Date.parse(showModal.data.EndTime), 'yyyy/MM/dd')}`} 
+          ticket={showModal.type === 'food' ? '--' : `${showModal.data.Charge ? showModal.data.Charge : '--'}`}  
+          location={showModal.data.Location ? showModal.data.Location : showModal.data.Address}  
+          phoneNumber={showModal.data.Phone ? showModal.data.Phone : '--'} 
+          imagePath={showModal.data.Picture?.PictureUrl1 ? showModal.data.Picture.PictureUrl1 : "/images/no_image_available.png"}
+          imageAlt={showModal.data.Picture?.PictureDescription1 ? showModal.data.Picture?.PictureDescription1 : 'Modal Image'}
         />}
       <Header/>
       <section>

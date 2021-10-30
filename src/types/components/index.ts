@@ -7,7 +7,6 @@ export type LayoutProps = {
     description?: string,
     previewImage?: string,
     siteName?: string,
-    show: boolean,
 }
 
 // Todo: replace any type with event
