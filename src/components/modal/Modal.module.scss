@@ -12,6 +12,8 @@
     align-items: flex-start;
     justify-content: center;
     padding-top: 50px;
+    padding-bottom: 50px;
+    z-index: 15;
     @include desktop{
         padding-top: 0px;
     }
@@ -20,10 +22,10 @@
         height: 45px;
         position: relative;
         left: -24px;
-        top: 43px;
+        top: -30px;
         @include desktop{
             left: 33px;
-            top: 100px;
+            top: 25px;
         }
         &.pink{
             background-color: $PINK;
@@ -38,7 +40,7 @@
         width: 296px;
         // height: 810px;
         position: relative;
-        top: 100px;
+        top: 25px;
         left: 21px;
         background-color: $WHITE;
         padding: 18px;
@@ -48,22 +50,35 @@
             padding: 32px;
         }
         &::after, &::before{
-            width: 342px;
-            height: 64px;
+            width: 145px;
+            height: 52px;        
             content: " ";
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
             position: absolute;
-            bottom: -35px;
+            bottom: -43px;
             pointer-events: none;
             z-index: -1;
+            @include tablet{
+                width: 342px;
+                height: 64px;
+                bottom: -35px;
+                background-size: cover;
+            }
         }
         &::before{
-            left: 10px;
+            left: 5px;
             background-image: url('/images/modal_left_shadow.png');
+            @include tablet{
+                left: 10px;
+            }
         }
         &::after{
-            right: 10px;
+            right: 5px;
             background-image: url('/images/modal_right_shadow.png');
+            @include tablet{
+                right: 10px;
+            }
         }
         .info-wrapper{
             .image-container{

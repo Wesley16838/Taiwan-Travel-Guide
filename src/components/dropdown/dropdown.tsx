@@ -7,7 +7,6 @@ import { useTourisms } from "../../context/tourismProvider"; //Activity
 
 const Dropdowns = ({data, arrayData, onClick, type, defaultLabel, defaultValue, label}: DropDownProps) => {
     const [open, setOpen] = useState(false);
-    const [array, setArray] = useState(arrayData=== undefined ? data?.listing : arrayData)
     const [selection, setSelection] = useState({
         value: defaultValue,
         label: defaultLabel,
@@ -47,7 +46,7 @@ const Dropdowns = ({data, arrayData, onClick, type, defaultLabel, defaultValue, 
 
     return(
         <div className={styles.wrapper} aria-labelledby="action menu" ref={dropdownRef}>
-            <div className={`${styles.action} ${open ? styles.open : ''} ${label && label==='tp' ? styles.tp: styles.basic}`} tabIndex={0} role="button" onClick={() => handleOnToggle()}>
+            <div className={`${styles.action} ${open ? styles.open : ''} ${label && label==='tp' ? styles.tp: styles.basic} ${arrayData !== undefined && arrayData.length === 0 ? styles.disabled : ''}`} tabIndex={0} role="button" onClick={() => handleOnToggle()}>
                 <p>{selection.label}</p>
                 <div className={styles.arrow}>
                     <Image

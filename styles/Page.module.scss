@@ -110,11 +110,14 @@
 }
 .wrapper-tp{
     width: 328px;
-    margin: 47px auto;
+    margin: 47px auto 80px auto;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    @include tablet{
+        margin: 81px auto 115px auto;
+    }
     .loading-container{
         background-color: $WHITE;
         width: 100%;

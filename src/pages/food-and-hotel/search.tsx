@@ -50,6 +50,8 @@ const FoodAndHotelSearchPage: NextPage = () => {
                 })   
             }catch(err){
                 addLoading(false)
+
+                // Handle Error Message here
                 console.log('err,', err)
             }
         }

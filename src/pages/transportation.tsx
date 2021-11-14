@@ -165,6 +165,8 @@ const TransportationPage: NextPage = () => {
                 addLoading(false)
             }catch(err){
                 addLoading(false)
+
+                // Handle Error Message here
                 console.log('err,', err)
             }
         }

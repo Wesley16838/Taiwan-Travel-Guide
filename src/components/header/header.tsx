@@ -80,7 +80,6 @@ const Header = ({label, hasTab, onClick, onSearch, value, tabdata}: HeaderProps)
             .query({ name: "geolocation" })
             .then(function (result) {
             if (result.state === "granted") {
-                console.log(result.state);
                 navigator.geolocation.getCurrentPosition(function(position) {
                 });
                 //If granted then you can directly call your function here
@@ -203,7 +202,7 @@ const Header = ({label, hasTab, onClick, onSearch, value, tabdata}: HeaderProps)
                         <Dropdowns 
                             defaultLabel={searchsBus.route === '' ? '選擇路線' : searchsBus.route} 
                             defaultValue={searchsBus.route === '' ? '' : searchsBus.route}
-                            arrayData={BusData.get(searchsBus.city)} 
+                            arrayData={BusData.get(searchsBus.city) || []} 
                             onClick={handleOnDropDownBusChange} 
                             type={"route"}
                             label={'tp'}
