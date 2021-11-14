@@ -46,6 +46,7 @@ export type ButtonProps = {
     ariaLabel?: string,
     onClick: any,
     linkPath?: string,
+    disable?:boolean,
 }
 
 export type DropDownProps = {

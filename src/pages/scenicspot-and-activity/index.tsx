@@ -97,7 +97,7 @@ const Home: NextPage = () => {
             <h2>熱門餐飲</h2>
             <div className={styles['food-wrapper-desktop']}>
               {
-                foods.slice(0, 11).map((food, index) => {
+                foods.slice(0, 10).map((food, index) => {
                   return(
                     <Card 
                       key={food.Name}

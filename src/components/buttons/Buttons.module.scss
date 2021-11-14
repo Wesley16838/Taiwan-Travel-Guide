@@ -20,6 +20,9 @@
     &.black{
         background-color: $BLACK;
     }
+    &.disable{
+        cursor: not-allowed;
+    }
     .image-container{
         width: 24px;
         height: 24px;

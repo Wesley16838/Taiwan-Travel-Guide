@@ -75,29 +75,23 @@ const Header = ({label, hasTab, onClick, onSearch, value, tabdata}: HeaderProps)
     }
 
     const handleOnGetLocation = () => {
-        console.log('Get Location')
         if (navigator.geolocation) {
-            console.log('first one')
             navigator.permissions
             .query({ name: "geolocation" })
             .then(function (result) {
             if (result.state === "granted") {
                 console.log(result.state);
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    console.log('correct,', position)
                 });
                 //If granted then you can directly call your function here
             } else if (result.state === "prompt") {
-                console.log(result.state);
             } else if (result.state === "denied") {
                 //If denied then you have to show instructions to enable location
             }
             result.onchange = function () {
-                console.log('onchange,', result.state);
             };
             });
           } else {
-            console.log("Not Available");
           }
     }
 
@@ -188,6 +182,7 @@ const Header = ({label, hasTab, onClick, onSearch, value, tabdata}: HeaderProps)
                                         ariaLabel={'Get current location'} 
                                         onClick={handleOnGetLocation} 
                                         type={'image'}
+                                        disable={true}
                                     />
                                 </div>
                             </div>

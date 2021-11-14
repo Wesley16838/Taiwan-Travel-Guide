@@ -53,6 +53,24 @@ const FoodAndHotelPage: NextPage = () => {
                 <article className={styles['page-article']}>
                     <div className={styles.topic}>
                         <h2>熱門美食</h2>
+                        <div className={styles['food-wrapper-desktop']}>
+                          {
+                            hotels.slice(0,10).map((hotel, index) => {
+                              return(
+                                <Card 
+                                  key={hotel.Name}
+                                  onClick={() => handleOnCardClick('hotel', index)} 
+                                  type={'small'} 
+                                  name={hotel.Name} 
+                                  description={hotel.Description} 
+                                  location={hotel.Address} 
+                                  imagePath={Object.keys(hotel.Picture).length !== 0 ? hotel.Picture.PictureUrl1 : "/images/no_image_available.png"} 
+                                  imageAlt={Object.keys(hotel.Picture).length !== 0 ? hotel.Picture.PictureDescription1 : "Activity Image"}
+                                />
+                              )
+                            })
+                          }
+                        </div>
                         <div className={styles['food-wrapper']}>
                         {
                             foods.map((food, index) => {
@@ -78,7 +96,7 @@ const FoodAndHotelPage: NextPage = () => {
             <h2>熱門住宿</h2>
             <div className={styles['food-wrapper-desktop']}>
               {
-                hotels.slice(0,11).map((hotel, index) => {
+                hotels.slice(0,10).map((hotel, index) => {
                   return(
                     <Card 
                       key={hotel.Name}
