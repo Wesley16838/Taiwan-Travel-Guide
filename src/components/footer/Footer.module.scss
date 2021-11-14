@@ -5,7 +5,10 @@
     text-align: center;
     line-height: 65px;
     background-color: $WHITE;
+    position: fixed;
+    bottom: 0px;
     p{
+        margin: 0px;
         font-size: $SMALL;
         font-weight: $REGULAR;
     }

@@ -1,29 +1,72 @@
-.container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: auto;
-    row-gap: 5px;
-    column-gap: 13px;
-    grid-template-areas: 
-        "itemOne itemTwo itemFour itemFive itemSeven"
-        "itemOne itemThree itemFour itemSix itemSeven";
-    position: relative;
+@import '../../shared/theme.scss';
+.wrapper{
+    width: 332px;
+    @include tablet{
+        width: 662px;
+        cursor: grab;
+    }
+    @include desktop{
+        width: 1062px;
+        cursor: unset;
+    }
 }
 
-.item-one, .item-four, .item-seven, .item-two, .item-three, .item-five, .item-six{
+.container{
+    width: 1650px;
+    height: 202px;
+    padding: 5px 5px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: auto;
+    row-gap: 4px;
+    column-gap: 4px;
+    grid-template-areas: 
+        "itemOne itemTwo itemFour itemFive itemSeven itemEight itemNine itemEleven itemTwelve itemFourteen"
+        "itemOne itemThree itemFour itemSix itemSeven itemEight itemTen itemEleven itemThirteen itemFourteen";
+    position: relative;
+    @include desktop{
+        display: none;
+    }
+}
+
+.container-lg{
+    width: 100%;
+    height: 245px;
+    display: none;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 
+    "itemOne itemTwo itemFour itemFive itemSeven"
+    "itemOne itemThree itemFour itemSix itemSeven";
+    row-gap: 5px;
+    column-gap: 13px;
+    position: relative;
+    @include desktop{
+        display: grid;
+    }
+}
+
+
+.item-one, .item-four, .item-seven, .item-two, .item-three, .item-five, .item-six, .item-seven, .item-eight, .item-nine, .item-ten, .item-eleven, .item-twelve,.item-thirteen, .item-fourteen{
     box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
 }
 
-.item-one, .item-four, .item-seven{
-    height: 245px;
-    padding: 14px 12px;
+.item-one, .item-four, .item-seven, .item-eight, .item-eleven, .item-fourteen{
+    height: 192px;
+    padding: 10px;
+    @include desktop{
+        height: 245px;
+        padding: 14px 12px;
+    }
 }
 
-.item-two, .item-three, .item-five, .item-six{
-    height: 120px;
-    padding: 7px 8px;
+.item-two, .item-three, .item-five, .item-six, .item-nine, .item-ten, .item-twelve, .item-thirteen{
+    height: 94px;
+    padding: 5.5px 6.5px;
+    @include desktop{
+        height: 120px;
+        padding: 7px 8px;
+    }
 }
-
 .item-one {
     grid-area: itemOne;
 }
@@ -45,10 +88,32 @@
 .item-seven {
     grid-area: itemSeven;
 }
+.item-eight {
+    grid-area: itemEight;
+}
+.item-nine {
+    grid-area: itemNine;
+}
+.item-ten {
+    grid-area: itemTen;
+}
+.item-eleven {
+    grid-area: itemEleven;
+}
+.item-twelve {
+    grid-area: itemTwelve;
+}
+.item-thirteen {
+    grid-area: itemThirteen;
+}
+.item-fourteen {
+    grid-area: itemFourteen;
+}
 .button-container{
     width: 32px;
     height: 32px;
     position: absolute;
+    display: none;
     &.next{
         right: -53px;
         top: 50%;
@@ -58,5 +123,8 @@
         left: -53px;
         top: 50%;
         transform: translateY(-50%);
+    }
+    @include desktop{
+        display: block;
     }
 }

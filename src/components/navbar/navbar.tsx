@@ -4,7 +4,6 @@ import logoPic from '../../../public/images/logo.png'
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react'
 const Navbar = (props: any) => {
-    const {show} = props
     const [nav, setNav] = useState(false)
     const listenScrollEvent = () => {
         if (window.scrollY > 100) {
@@ -20,7 +19,7 @@ const Navbar = (props: any) => {
       }, [listenScrollEvent])
     
     return(
-        <div className={`${styles.wrapper} ${nav && styles.small}`}>
+        <div className={`${styles.wrapper} ${nav ? styles.small : ''}`}>
             <div className={styles.container}>
                 <div className={styles['image-container']}>
                     <Image
@@ -32,9 +31,9 @@ const Navbar = (props: any) => {
                 
                 
                 <div className={styles['links-group']}>
-                    <Links name="台灣景點" path="/" color="pink"/>
-                    <Links name="美食住宿" path="/" color="yellow"/>
-                    <Links name="景點交通" path="/" color="green"/>
+                    <Links name="台灣景點" path="/scenicspot-and-activity" color="pink"/>
+                    <Links name="美食住宿" path="/food-and-hotel" color="yellow"/>
+                    <Links name="景點交通" path="/transportation" color="green"/>
                 </div>
             </div>
         </div>

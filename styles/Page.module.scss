@@ -1,18 +1,57 @@
 
 @import '/src/shared/theme.scss';
 .topic{
+    .scenicspot-wrapper{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap:9px;
+        row-gap: 35px;
+        margin-bottom: 44px;
+        @include desktop{
+            grid-template-columns: repeat(5, 1fr);
+        }
+        &.result-none{
+            display: unset;
+        }
+    }
     .activity-wrapper{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 48px;
-        row-gap: 39px;
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 17px;
+        row-gap: 17px;
+        @include tablet{
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include desktop{
+            column-gap: 48px;
+            row-gap: 39px;
+        }
+    }
+    .food-wrapper-desktop{
+        display: none;
+        @include desktop{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            row-gap: 27px;
+            column-gap: 9px;
+            margin-bottom: 77px;
+        }
     }
     .food-wrapper{
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        row-gap: 27px;
-        column-gap: 9px;
         margin-bottom: 77px;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 4px;
+        row-gap: 19px;
+        @include tablet{
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: 26px;
+            column-gap: 12px;
+        }
+        @include desktop{
+            display: none;
+        }
     }
     h2{
         font-size: $MEDIUM_LARGE;
@@ -45,5 +84,180 @@
                 background-image: url('/images/square.png');
             }
         }
+    }
+    .result-none-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 500px;
+        height: 500px;
+        margin: auto;
+    }
+}
+
+.loading-container{
+    background-color: $WHITE;
+    width: 100%;
+    height: calc(100vh - 664px);
+    top: 104px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    @include tablet{
+        display: flex;
+    }
+}
+.wrapper-tp{
+    width: 328px;
+    margin: 47px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .loading-container{
+        background-color: $WHITE;
+        width: 100%;
+        height: 100%;
+        top: 104px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        @include tablet{
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    @include tablet{
+        background-color: $WHITE;
+        margin: 81px auto;
+        max-height: 1000px;
+        width: 715px;
+        padding: 34px 0px;
+    }
+
+    @include desktop{
+        width: 955px;
+    }
+    &.no-result{
+        align-items: flex-start;
+        padding: 34px 55px;
+    }
+    &:before, &:after{
+        content: "";
+        position: absolute;
+        width: 480px;
+        height: 52px;
+        background-size: cover;
+        background-position-y: bottom;
+        z-index: -1;
+        bottom: -45px;
+        display: none;
+        @include tablet{
+            display: block;
+        }
+    }
+    &:before{
+        left: 23px;
+        background-image: url('/images/shadow-left-lg.png');
+    }
+    &:after{
+        right: 23px;
+        background-image: url('/images/shadow-right-lg.png');
+
+    }
+    .warning{
+            color: $PINK;
+            font-size: $MEDIUM;
+            position: absolute;
+            right: 0px;
+            top: -50px;
+    }
+    .container-tp{
+        width: 683px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: relative;
+        @include tablet{
+            height: auto;
+            max-height: 932px;
+            background-color: $WHITE;
+            overflow-y: scroll;
+        }
+        &.no-result{
+            width: 100%;
+            scrollbar-width: none;
+            &::-webkit-scrollbar{
+                display: none;
+            }
+        }
+        .notice{
+            font-size: $NOTICE;
+            line-height: 28px;
+            color: $GRAY;
+        }
+        .item-tp{
+            width: 288px;
+            height: 44px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            &.single-line{
+                width: auto;
+                justify-content: flex-start;
+                .name{
+                    width: auto;
+                    margin-left: 33px;
+                }
+            }
+            .name{
+                width: 110px;
+            }
+            .status{
+                width: 143px;
+                height: 44px;
+                border-radius: 7px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &.basic{
+                    border: solid 2px $BLACK;
+                }
+                &.none{
+                    border: solid 2px $GRAY;
+                    color: $GRAY;
+                }
+                &.begin{
+                    border: solid 2px $PINK;
+                    background-color: $PINK;
+                    color: $WHITE
+                }
+                &.end{
+                    border: solid 2px $YELLOW;
+                    background-color: $YELLOW;
+                    color: $WHITE
+                }
+                &.error{
+                    border: solid 2px $RED;
+                    color: $RED;
+                }
+            }
+        }
+    }
+}
+
+.left-container-tp{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 20px;
+    row-gap: 32px;
+    margin: auto;
+    @include tablet{
+        grid-template-columns: repeat(2, 1fr);
     }
 }

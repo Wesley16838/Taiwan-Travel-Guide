@@ -11,12 +11,20 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    padding-top: 50px;
+    @include desktop{
+        padding-top: 0px;
+    }
     .button-container{
         width:45px;
         height: 45px;
         position: relative;
-        left: 33px;
-        top: 100px;
+        left: -24px;
+        top: 43px;
+        @include desktop{
+            left: 33px;
+            top: 100px;
+        }
         &.pink{
             background-color: $PINK;
         }
@@ -27,14 +35,18 @@
         }
     }
     .modal-container{
-        width: 676px;
+        width: 296px;
         // height: 810px;
         position: relative;
         top: 100px;
         left: 21px;
         background-color: $WHITE;
-        padding: 32px;
+        padding: 18px;
         margin-bottom: 142px;
+        @include tablet{
+            width: 676px;
+            padding: 32px;
+        }
         &::after, &::before{
             width: 342px;
             height: 64px;
@@ -62,12 +74,13 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-end;
-                margin: 22px 0px;
+                margin-top: 22px;
             }
             .info{
                 display: grid;
                 row-gap: 22px;
                 grid-template-rows: auto;
+                margin-top: 22px;
                 h3{
                     margin: 0px;
                     font-weight: $REGULAR;
@@ -77,11 +90,17 @@
                 }
                 .detail{
                     display: grid;
-                    grid-template-columns: 325px 1fr;
+                    grid-template-columns: repeat(1, 1fr);
                     grid-template-rows: repeat(2, 1fr);
                     row-gap: 25px;
                     column-gap: 43px;
+                    @include tablet{
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                     p{
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                         position: relative;
                         padding-left: 34px;
                         &::before{

@@ -40,7 +40,7 @@
 
 .container{
     &__small{
-        height: 251px;
+        height: 188px;
         padding: 12px;
         display: flex;
         flex-direction: column;
@@ -48,28 +48,51 @@
         background-color: $WHITE;
         position: relative;
         transition: $TRANSITION;
-
+        cursor: pointer;
+        @include desktop{
+            height: 251px;
+        }
         &:before, &:after{
             content: "";
             position: absolute;
-            width: 216px;
-            height: 45px;
-            background-size: cover;
+            width: 73px;
+            height: 23px;
+            background-size: contain;
             background-position-y: bottom;
+            background-repeat: no-repeat;
             z-index: -1;
-            top: 228px;
+            top: 177px;
+            @include desktop{
+                width: 216px;
+                height: 45px;
+                top: 228px;
+                background-size: cover;
+            }
         }
         &:before{
-            left: -2px;
+            left: 0px;
             background-image: url('/images/left_triangle_m.png');
+            @include desktop{
+                left: -2px;
+            }
         }
         &:after{
-            right: -2px;
+            right: 0px;
             background-image: url('/images/right_triangle_m.png');
+            @include desktop{
+                right: -2px;
+            }
         }
         .image-container{
-            width: 182px;
-            height: 137px
+            width: 128px;
+            height: 96px;
+            @include tablet{
+                width: 132px;
+            }
+            @include desktop{
+                width: 182px;
+                height: 137px
+            }
         }
         .title{
             font-size: $MEDIUM_SMALL;
@@ -104,44 +127,74 @@
             justify-content: space-between;
             height: 69px;
             margin-top: 10px;
-            width: 182px;
+            width: 132px;
+            @include desktop{
+                width: 182px;
+                height: 69px;
+            }
         }
     }
     &__medium{
-        height: 228px;
+        height: 120px;
         padding: 16px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         background-color: $WHITE;
         position: relative;
+        @include tablet{
+            height: 120px;
+        }
+        @include desktop{
+            height: 228px;
+        }
         &:before, &:after{
             content: "";
             position: absolute;
-            width: 260px;
+            width: 150px;
             height: 45px;
-            background-size: cover;
+            background-size: contain;
             background-position-y: bottom;
             z-index: -1;
-            top: 215px;
+            top: 95px;
+            @include desktop{
+                background-size: cover;
+                width: 260px;
+                height: 45px;
+                top: 215px;
+            }
         }
         &:before{
             left: -3px;
             background-image: url('/images/left_triangle_m.png');
+            @include desktop{
+                left: 0px;
+            }
         }
         &:after{
             right: -3px;
             background-image: url('/images/right_triangle_m.png');
+            @include desktop{
+                right: 0px;
+            }
         }
         .image-container{
-            width:187px;
-            height:196px;
+            width:92px;
+            height:88px;
+            @include desktop{
+                width:187px;
+                height:196px;
+            }
+
         }
         .info{
             margin-left: 16px;
             display: grid;
             column-gap: 14px;
-            width: calc(100% - 187px);
+            width: calc(100% - 96px);
+            @include desktop{
+                width: calc(100% - 187px);
+            }
             .title{
                 font-size: $MEDIUM;
                 font-weight: $REGULAR;
@@ -152,24 +205,34 @@
                 text-overflow: ellipsis;
             }
             .detail{
-                height: 102px;
-                color: $GRAY;
-                font-size: $MEDIUM_SMALL;
-                font-weight: $REGULAR;
-                margin: 14px 0px;
+                display: none;
+                @include desktop{
+                    height: 102px;
+                    color: $GRAY;
+                    font-size: $MEDIUM_SMALL;
+                    font-weight: $REGULAR;
+                    margin: 14px 0px;
+                }
             }
             .location{
-                width: 120px;
+                width: 167px;
                 height: 40px;
                 line-height: 40px;
                 font-size: $MEDIUM_SMALL;
                 font-weight: $REGULAR;
                 margin: 0px;
                 position: relative;
-                padding-left: 32px;
+                padding-left: 22px;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
+                @include tablet{
+                    width: 182px;
+                }
+                @include desktop{
+                    width: 120px;
+                    padding-left: 32px;
+                }
                 &:before{
                     content: "";
                     position: absolute;
@@ -177,18 +240,29 @@
                     width: 24px;
                     height: 24px;
                     background-size: cover;
-                    left: 0px;
+                    left: -4px;
                     top: 50%;
                     transform: translateY(-50%);
+                    @include desktop{
+                        left: 0px;
+                    }
                 }
             }
             .footer{
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                .button-container{
+                align-items: flex-end;
+                @include desktop{
                     width: 120px;
                     height: 40px;
+                }
+                .button-container{
+                    display: none;
+                    @include desktop{
+                        width: 120px;
+                        height: 40px;
+                    }
                 }
             }
         }

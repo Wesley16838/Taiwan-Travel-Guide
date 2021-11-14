@@ -3,7 +3,8 @@ import { CardProps } from '../../types/components'
 import Buttons from '../buttons/buttons'
 import styles from './Card.module.scss'
 import locationIcon from '../../../public/images/location_icon_no_circle.png'
-const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: CardProps) => {
+
+const Card= ({type, name, imagePath, onClick, description, location, imageAlt, preload=false}: CardProps) => {
     if(type === "image"){
         const handleOnImageOnclick = () => {
             if(onClick) onClick()
@@ -19,14 +20,18 @@ const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: 
         )
     }
 
-    const handleOnClick = () => {
-        if(onClick) onClick()
+    const handleOnClickSmall = () => {
+        if(onClick && type==='small') onClick()
+    }
+
+    const handleOnClickMedium = () => {
+        if(onClick && type==='medium') onClick()
     }
 
     return(
-        <div className={`${styles[`container__${type}`]}`}>
+        <div className={`${styles[`container__${type}`]}`} onClick={() => handleOnClickSmall()}>
             <div className={styles['image-container']}>
-                <Image src={imagePath} alt={imageAlt} layout={'fill'}/>
+                <Image src={encodeURI(imagePath)} alt={imageAlt} layout={'fill'} objectFit={'cover'} quality={50}/>
             </div>
             <div className={styles.info}>
                 <h3 className={styles.title}>
@@ -43,7 +48,7 @@ const Card= ({type, name, imagePath, onClick, description, location, imageAlt}: 
                     </p>
                     {type === 'medium' &&
                         <div className={styles['button-container']}>
-                            <Buttons title={'活動詳情'} onClick={() => handleOnClick()}/>
+                            <Buttons title={'活動詳情'} onClick={() => handleOnClickMedium()}/>
                         </div>
                     }
                 </div>

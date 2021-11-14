@@ -1,4 +1,5 @@
-$PINK: #FF1D6C;
+$PINK: #ff0059;
+$RED: #bb0303;
 $PINK_H: #ff1d6c31;
 $YELLOW: #FFB72C;
 $GREEN: #007350;
@@ -19,14 +20,36 @@ $MEDIUM_LARGE: 20px;
 $MEDIUM: 16px;
 $MEDIUM_SMALL: 14px;
 $SMALL: 12px;
+$NOTICE: 24px;
 
 $BOLD: 700;
 $REGULAR: 400;
 $THIN: 300;
 
-$BREAKPOINT_DOUBLE_EXTRA_LARGE: 1480px;
-$BREAKPOINT_EXTRA_LARGE: 1200px;
-$BREAKPOINT_LARGE: 992px;
-$BREAKPOINT_MEDIUM: 768px;
-$BREAKPOINT_SMALL: 576px;
-$BREAK_X_SMALL: 576px;
+$BREAKPOINT_DESKTOP: 1280px;
+$BREAKPOINT_TABLET: 768px;
+$BREAKPOINT_MOBILE: 360px;
+
+@mixin mobile {
+    @media (min-width: #{$BREAKPOINT_MOBILE}) {
+      @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$BREAKPOINT_TABLET}){
+      @content;
+    }
+}
+
+@mixin onlytablet {
+    @media (min-width: #{$BREAKPOINT_TABLET}) and (max-width: #{$BREAKPOINT_DESKTOP - 1px}){
+      @content;
+    }
+}
+  
+@mixin desktop {
+    @media (min-width: #{$BREAKPOINT_DESKTOP}) {
+      @content;
+    }
+}

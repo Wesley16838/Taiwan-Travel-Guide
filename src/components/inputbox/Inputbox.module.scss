@@ -1,7 +1,10 @@
 @import '../../shared/theme.scss';
 .search-input{
-    width: 445px;
+    width: 278px;
     height: 40px;
+    @include tablet{
+        width: 445px;
+    }
     input{
         padding-left: 24px;
     }

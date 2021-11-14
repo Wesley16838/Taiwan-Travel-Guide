@@ -1,0 +1,47 @@
+@import '../../shared/theme.scss';
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        padding: 0px;
+        .item{
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: $TRANSITION;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 0px 3px;
+            &.active{
+                border: 1px solid $PINK;
+            }
+            &:hover{
+                background-color: $PINK_H
+            }
+            &:active{
+                background-color: $PINK;
+                color: $WHITE;
+            }
+        }
+    }
+}
+
+.button-container{
+    width: 32px;
+    height: 32px;
+    &.previous{
+        margin-right: 20px;
+    }
+    &.next{
+        margin-left: 20px;
+    }
+}

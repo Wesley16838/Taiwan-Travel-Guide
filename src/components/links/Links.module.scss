@@ -4,10 +4,30 @@
     font-size: 14px;
     font-weight: 400;
     position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: $TRANSITION;
+    opacity: 1;
+    &:hover{
+        opacity: .6;
+    }
     &.pink{
         color: $PINK;
         &::before{
             background-image: url('/images/attraction_icon.png');
+        }
+        &.actived{
+            &::after{
+                width: 40px;
+                height: 3px;
+                content: " ";
+                background-color:$PINK;
+                position: absolute;
+                left: 50%;
+                bottom: -5px;
+                transform: translateX(-50%);
+            }
         }
     }
     &.yellow{
@@ -15,11 +35,35 @@
         &::before{
             background-image: url('/images/food_live_icon.png');
         }
+        &.actived{
+            &::after{
+                width: 40px;
+                height: 3px;
+                content: " ";
+                background-color:$YELLOW;
+                position: absolute;
+                left: 50%;
+                bottom: -5px;
+                transform: translateX(-50%);
+            }
+        }
     }
     &.green{
         color: $GREEN;
         &::before{
             background-image: url('/images/transportation_icon.png');
+        }
+        &.actived{
+            &::after{
+                width: 40px;
+                height: 3px;
+                content: " ";
+                background-color:$GREEN;
+                position: absolute;
+                left: 50%;
+                bottom: -5px;
+                transform: translateX(-50%);
+            }
         }
     }
     &.pink, &.yellow, &.green{
@@ -32,6 +76,10 @@
             left: -40px;
             top: -12px;
             pointer-events: none;
+            display: none;
+            @include tablet{
+                display: block;
+            }
         }
     }
 }

@@ -9,6 +9,15 @@ export type LayoutProps = {
     siteName?: string,
 }
 
+export type HeaderProps = {
+    label?: string,
+    onSearch?:(name: string, value: string) => void;
+    hasTab?:boolean,
+    value?: number, 
+    onClick?:(value: number) => void;
+    tabdata?:string[]
+}
+
 // Todo: replace any type with event
 export type LinkProps = {
     path: string,
@@ -24,6 +33,7 @@ export type InputProps = {
     classname?: string,
     placeholder?: string,
     props?: string[],
+    defaultValue?: string,
 }
 
 export type ButtonProps = {
@@ -35,12 +45,17 @@ export type ButtonProps = {
     backgroundColor?: string,
     ariaLabel?: string,
     onClick: any,
+    linkPath?: string,
 }
 
 export type DropDownProps = {
-    data: DataType;
+    data?: DataType;
+    arrayData?: any;
     onClick: any;
     type?: string;
+    defaultValue?: string,
+    defaultLabel?: string,
+    label?: string,
 }
 
 export type CardProps = {
@@ -51,6 +66,7 @@ export type CardProps = {
     description?: string;
     location?: string;
     imageAlt?: string;
+    preload?: boolean;
 }
 
 export type SliderProps = {
@@ -60,7 +76,7 @@ export type SliderProps = {
 export type ModalProps = {
     show: boolean;
     index: number;
-    imagePath: string;
+    imagePath: any;
     imageAlt: string;
     title: string; 
     description: string; 
@@ -71,6 +87,14 @@ export type ModalProps = {
     onClick: any;
     onCancel: any;
 }
+
+export type Pagination = {
+    dataLength: number;
+    pageSize: number;
+    onClick: any;
+    currentPage: number;
+}
+
 /** 
  * Type for single param in the props
 */

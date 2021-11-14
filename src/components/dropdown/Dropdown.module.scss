@@ -1,12 +1,19 @@
 @import '../../shared/theme.scss';
 .wrapper{
     position: relative;
+    cursor: pointer;
     p{
         margin: 0px;
     }
+    .action{
+        p{
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            white-space: nowrap;
+        }
+    }
 }
 .action{
-    width: 219px;
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -16,6 +23,18 @@
     border-radius: 6px;
     padding: 0px 8px 0px 16px;
     box-shadow: 0px 4px 3px 0px #0D0B0C33;
+    &.basic{
+        width: 135px;
+        @include tablet{
+            width: 219px;
+        }
+    }
+    &.tp{
+        width: 135px;
+        @include tablet{
+            width: 242px;
+        }
+    }
     &.open{
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
@@ -25,7 +44,6 @@
     }
 }
 .menu{
-    width: 219px;
     position: absolute;
     top: 40px;
     background-color: $WHITE;
@@ -37,12 +55,25 @@
     list-style-type: none;
     padding: 0px;
     box-shadow: $SHADOW;
+    z-index: 15;
+    &.basic{
+        width: 135px;
+        @include tablet{
+            width: 219px;
+        }
+    }
+    &.tp{
+        width: 135px;
+        @include tablet{
+            width: 242px;
+        }
+    }
     .item{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        height: 40px;
+        height: auto;
         line-height: 40px;
         transition: .2s ease;
         p{

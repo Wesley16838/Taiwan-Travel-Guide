@@ -16,6 +16,7 @@ const Buttons = ({title, type, imagePath, imageAlt, backgroundColor, ariaLabel, 
                         src={imagePath}
                         alt={imageAlt}
                         layout={'fill'}
+                        objectFit={'cover'}
                     />
                 </div>
             </button>
@@ -25,8 +26,7 @@ const Buttons = ({title, type, imagePath, imageAlt, backgroundColor, ariaLabel, 
         <button className={styles.wrapper} onClick={(e)=>handleOnClick(e)}>
             {title}
         </button>
-    )
-    
+    )   
 }
 
 export default Buttons;

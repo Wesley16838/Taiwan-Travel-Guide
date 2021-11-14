@@ -7,6 +7,7 @@
     text-decoration: none;
     position: relative;
     box-shadow: $BUTTON_SHADOW;
+    cursor: pointer;
     &.pink{
         background-color: $PINK;
     }
@@ -22,9 +23,9 @@
     .image-container{
         width: 24px;
         height: 24px;
-        position: absolute;
+        position: relative;
         left: 50%;
-        top: 50%;
+        top: 12px;
         transform: translate(-50%, -50%);
     }
 }
@@ -37,6 +38,7 @@
     border-radius: 8px;
     color: $PINK;
     transition: $TRANSITION;
+    cursor: pointer;
     &:hover{
         background-color: $PINK_H
     }

@@ -29,7 +29,7 @@ input{
 }
 
 section{
-  width: 1065px;
+  width: 308px;
   margin: 0 auto;
 }
 
@@ -39,4 +39,15 @@ section article{
 
 * {
   box-sizing: border-box;
+}
+@media screen and (min-width: 768px){
+  section{
+    width: 662px;
+  }
+}
+
+@media screen and (min-width: 1280px){
+  section{
+    width: 1065px;
+  }
 }
