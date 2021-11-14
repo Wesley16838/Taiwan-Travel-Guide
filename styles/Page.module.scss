@@ -3,10 +3,13 @@
 .topic{
     .scenicspot-wrapper{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         column-gap:9px;
-        row-gap: 35px;
-        margin-bottom: 44px;
+        row-gap: 18px;
+        @include tablet{
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: 35px;
+        }
         @include desktop{
             grid-template-columns: repeat(5, 1fr);
         }
@@ -63,6 +66,10 @@
 }
 
 .page-article{
+    margin-top: 43px;
+    @include desktop{
+        margin-top: 60px;
+    }
     h2{
         &:before{
             content: " ";
@@ -115,6 +122,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 500px;
     @include tablet{
         margin: 81px auto 115px auto;
     }

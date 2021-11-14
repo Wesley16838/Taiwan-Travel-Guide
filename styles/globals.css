@@ -33,10 +33,6 @@ section{
   margin: 0 auto;
 }
 
-section article{
-  margin-top: 60px;
-}
-
 * {
   box-sizing: border-box;
 }
