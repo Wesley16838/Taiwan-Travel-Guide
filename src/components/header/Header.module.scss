@@ -121,7 +121,12 @@
         align-items: center;
         justify-content: center;
         @include desktop{
-            background-image: url('/images/header_background_image.png');
+            &.scene{
+                background-image: url('/images/header_background_image1.png');
+            }
+            &.food{
+                background-image: url('/images/header_background_image2.png');
+            }
             background-size: cover;
             background-repeat: no-repeat;
         }

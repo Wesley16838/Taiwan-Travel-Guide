@@ -108,7 +108,7 @@ const Header = ({label, hasTab, onClick, onSearch, value, tabdata}: HeaderProps)
             }
             {
                 label !== 'transportation' ?
-                <div className={headerStyles['wrapper-background']}>
+                <div className={`${headerStyles['wrapper-background']} ${label === 'food-and-hotel' ? headerStyles['food'] : headerStyles['scene']}`}>
                     <div className={headerStyles['container']}>
                         <h1 className={headerStyles['title']}>
                             Welc
