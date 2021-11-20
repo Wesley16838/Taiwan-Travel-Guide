@@ -26,6 +26,7 @@ input{
   border-radius: 6px;
   box-shadow: 0px 4px 3px 0px #0D0B0C33;
   outline: none;
+  -webkit-appearance: none;
 }
 
 section{
