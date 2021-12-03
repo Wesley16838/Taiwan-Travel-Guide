@@ -1,6 +1,6 @@
 @import '../../shared/theme.scss';
 .wrapper{
-    width: 332px;
+    width: 100%;
     @include tablet{
         width: 662px;
         cursor: grab;
