@@ -17,6 +17,7 @@ module.exports = {
   },
   images: {
     domains: [
+      'travel.taichung.gov.tw',
       'www.taiwan.net.tw', 
       'www.matsu-nsa.gov.tw', 
       'www.sunmoonlake.gov.tw', 

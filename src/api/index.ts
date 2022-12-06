@@ -1,23 +1,35 @@
 import axios from "axios";
-import jsSHA from "jssha";
+import { getWithExpiry, setWithExpiry } from "../utils/helper";
 
 export default axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism',
     responseType: "json",
-    headers: getAuthorizationHeader()
   });
 
-  function getAuthorizationHeader() {
-    //  填入自己 ID、KEY 開始
-        let AppID = '640552f682fd4ef09075b42b4dd2d19d';
-        let AppKey = '_emteeVBK7VQ2amqDfpBVhmAjMU';
-    //  填入自己 ID、KEY 結束
-        let GMTString = new Date().toUTCString();
-        let ShaObj = new jsSHA('SHA-1', 'TEXT');
-        ShaObj.setHMACKey(AppKey, 'TEXT');
-        ShaObj.update('x-date: ' + GMTString);
-        let HMAC = ShaObj.getHMAC('B64');
-        let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
-        return { 'Authorization': Authorization, 'X-Date': GMTString }; 
+export async function GetAuthorizationHeader() {
+    try{
+        const token = getWithExpiry('token');
+        console.log('token,', token)
+        if(token) return token;
+        const parameter: any = {
+            grant_type:"client_credentials",
+            client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET
+        };
+        let auth_url: any = process.env.NEXT_PUBLIC_AUTH_URL;
+        const res:any = await axios.post(auth_url,  new URLSearchParams(parameter), {
+            headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        console.log('res,', res)
+        const new_token = res.data.access_token
+        console.log('new_token,', new_token)
+        setWithExpiry('token', new_token, 86400)
+        return new_token;
+    }catch(err) {
+        console.log(err)
     }
-    
+}
+

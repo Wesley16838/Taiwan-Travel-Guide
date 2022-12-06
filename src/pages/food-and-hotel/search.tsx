@@ -9,7 +9,7 @@ import Card from '../../components/card/card'
 import Modal from '../../components/modal/modal'
 import Paginations from '../../components/pagination/pagination'
 import styles from '../../../styles/Page.module.scss'
-import API from '../../api' // remove later
+import API, { GetAuthorizationHeader } from '../../api' // remove later
 import { postcal, CityData } from '../../constants'
 import { useTourisms } from "../../context/tourismProvider"; //Activity
 import { useFetch } from '../../hooks/usefetch'
@@ -39,15 +39,24 @@ const FoodAndHotelSearchPage: NextPage = () => {
         const loadData = () => {
             try{ 
                 addLoading(true)
-                API.get( encodeURI(`/${category}${(city && city !== 'all') ? `/${city}` : ''}?${keyword ? `$filter=contains(Name,'${keyword}')&` : ''}$format=JSON`))
-                .then((data: any) => {
-                    if(category ==='Restaurant'){
-                        addRestaurants(city as string, data.data)
-                    } else {
-                        addHotels(city as string, data.data)
-                    }
-                    addLoading(false)
-                })   
+                GetAuthorizationHeader()
+                .then((token: any) => {
+                    API.get( encodeURI(`/${category}${(city && city !== 'all') ? `/${city}` : ''}?${keyword ? `$filter=contains(Name,'${keyword}')&` : ''}$format=JSON`),
+                    {
+                        headers: {
+                            "authorization": "Bearer " + token,
+                        }
+                    })
+                    .then((data: any) => {
+                        console.log('dataaa,', data)
+                        if(category ==='Restaurant'){
+                            addRestaurants(city as string, data.data)
+                        } else {
+                            addHotels(city as string, data.data)
+                        }
+                        addLoading(false)
+                    })   
+                })
             }catch(err){
                 addLoading(false)
 
@@ -107,7 +116,7 @@ const FoodAndHotelSearchPage: NextPage = () => {
                 index={showModal.index} 
                 onClick={(val: number) => handleOnCardClick(val)}
                 onCancel={()=> setShowModal({...showModal, show: false})}
-                title={showModal.data.Name}
+                title={category ==='Restaurant' ? showModal.data.RestaurantName : showModal.data.HotelName}
                 description={showModal.data.Description}
                 time={category ==='Restaurant' ? showModal.data.OpenTime : `--`} 
                 ticket={'--'}  
@@ -145,11 +154,11 @@ const FoodAndHotelSearchPage: NextPage = () => {
                                     restaurants.listing.slice((pages - 1)*20, (pages*20)).map((restaurant: any, index: number) => {
                                         return(
                                             <Card 
-                                            key={restaurant.Name + ((pages - 1)*20 + index)}
+                                            key={restaurant.RestaurantName + ((pages - 1)*20 + index)}
                                             onClick={() => handleOnCardClick((pages - 1)*20 + index)} 
                                             type={'small'} 
-                                            name={restaurant.Name} 
-                                            description={restaurant.DescriptionDetail} 
+                                            name={restaurant.RestaurantName} 
+                                            description={restaurant.Description} 
                                             location={`${restaurant.Address}`} 
                                             imagePath={restaurant.Picture.PictureUrl1 ? restaurant.Picture.PictureUrl1 : "/images/no_image_available.png"} 
                                             imageAlt={restaurant.Picture.PictureDescription1 !== 0 ? restaurant.Picture.PictureDescription1 : "Restaurant Image"}
@@ -161,11 +170,11 @@ const FoodAndHotelSearchPage: NextPage = () => {
                                         const areaName = hotel['ZipCode'] ? postcal.get(hotel.ZipCode.slice(0, 3)) : [""]
                                         return(
                                             <Card 
-                                            key={hotel.Name + ((pages - 1)*20 + index)}
+                                            key={hotel.HotelName + ((pages - 1)*20 + index)}
                                             onClick={() => handleOnCardClick((pages - 1)*20 + index)} 
                                             type={'small'} 
-                                            name={hotel.Name} 
-                                            description={hotel.DescriptionDetail} 
+                                            name={hotel.HotelName} 
+                                            description={hotel.Description} 
                                             location={`${hotel.City? `${hotel.City} ${areaName && areaName[0]}` : hotel.Address}`} 
                                             imagePath={hotel.Picture.PictureUrl1 ? hotel.Picture.PictureUrl1 : "/images/no_image_available.png"} 
                                             imageAlt={hotel.Picture.PictureDescription1 !== 0 ? hotel.Picture.PictureDescription1 : "Scenicspot Image"}

@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Layout from '../components/layout/layout'
 import Header from '../components/header/header'
 import styles from '../../styles/Page.module.scss'
-import API from '../api' // remove later
+import API, { GetAuthorizationHeader } from '../api' // remove later
 import { useTourisms } from "../context/tourismProvider"; //Activity
 import { useEffect, useState } from 'react'
 import loadingIcon from '../../public/newloading.json'
@@ -38,131 +38,145 @@ const TransportationPage: NextPage = () => {
                 const minutes = date.getMinutes();
                 const hour = date.getHours();
                 addLoading(true)
-                const res:any = await Promise.all([
-                    API.get(encodeURI(`/Bus/StopOfRoute/TaiwanTrip/${search.route}?$format=JSON`)),
-                    API.get(encodeURI(`/Bus/EstimatedTimeOfArrival/TaiwanTrip/${search.route}?$format=JSON`)),
-                    API.get(encodeURI(`/Bus/RealTimeNearStop/TaiwanTrip/${search.route}?$format=JSON`))
-                ])
                 let maximunGoStops:any = [];
                 let maximunBackStops:any = [];
-                const nearStopArray = res[2].data.map((stop: any) => stop.StopName['Zh_tw'])
-                res[0].data.forEach((item: any, index: number) => {
-                    if(item.Direction === 1){
-                        if(maximunBackStops.length<item.Stops.length){
-                            item.Stops.forEach((innerItem: any, index: number) => {
-                                const obj = res[1].data.filter((item:any) => innerItem.StopName['Zh_tw'] === item.StopName['Zh_tw'])[0]
-                                let busStatus = ""
-                                switch(obj.StopStatus){
-                                    case 0:
-                                        if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
-                                            busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
-                                        }else{
-                                            if(obj.EstimateTime){
-                                                const hr = Math.floor(obj.EstimateTime / 3600)
-    
-                                                const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
-    
-                                                const carry = Math.floor((minutes+Math.floor(min)) / 60)
-    
-                                                busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
-                                            } else {
-                                                // unknown error
-                                                busStatus = "不明";
-                                            }
-                                        }
-                                        
-                                        
-                                        break;
-                                    case 1: 
-                                        if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
-                                            busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
-                                        }else{
-                                            if(obj.EstimateTime){
-                                                const hr = Math.floor(obj.EstimateTime / 3600)
-    
-                                                const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
-    
-                                                const carry = Math.floor((minutes+Math.floor(min)) / 60)
-    
-                                                busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
+                GetAuthorizationHeader()
+                .then(async (token: any) => {
+                    const res:any = await Promise.all([
+                        API.get(encodeURI(`/Bus/StopOfRoute/TaiwanTrip/${search.route}?$format=JSON`),{
+                            headers: {
+                                "authorization": "Bearer " + token,
+                            }
+                        }),
+                        API.get(encodeURI(`/Bus/EstimatedTimeOfArrival/TaiwanTrip/${search.route}?$format=JSON`),{
+                            headers: {
+                                "authorization": "Bearer " + token,
+                            }
+                        }),
+                        API.get(encodeURI(`/Bus/RealTimeNearStop/TaiwanTrip/${search.route}?$format=JSON`),{
+                            headers: {
+                                "authorization": "Bearer " + token,
+                            }
+                        })
+                    ])
+                    const nearStopArray = res[2].data.map((stop: any) => stop.StopName['Zh_tw'])
+                    res[0].data.forEach((item: any, index: number) => {
+                        if(item.Direction === 1){
+                            if(maximunBackStops.length<item.Stops.length){
+                                item.Stops.forEach((innerItem: any, index: number) => {
+                                    const obj = res[1].data.filter((item:any) => innerItem.StopName['Zh_tw'] === item.StopName['Zh_tw'])[0]
+                                    let busStatus = ""
+                                    switch(obj.StopStatus){
+                                        case 0:
+                                            if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
+                                                busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
                                             }else{
-                                                busStatus = "尚未發車";
+                                                if(obj.EstimateTime){
+                                                    const hr = Math.floor(obj.EstimateTime / 3600)
+        
+                                                    const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
+        
+                                                    const carry = Math.floor((minutes+Math.floor(min)) / 60)
+        
+                                                    busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
+                                                } else {
+                                                    // unknown error
+                                                    busStatus = "不明";
+                                                }
                                             }
-                                        }
-                                        break;
-                                    case 2:
-                                        busStatus = "交管不停靠";
-                                        break;
-                                    case 3:
-                                        busStatus = "末班車已過";
-                                        break;
-                                    case 4:
-                                        busStatus = "今日不營運";
-                                        break;
-                                }
-                                maximunBackStops.push({name: innerItem.StopName['Zh_tw'], status: busStatus})
-                            })
-                        }
-                    } else if(item.Direction === 0) {
-                        if(maximunGoStops.length<item.Stops.length){
-                            item.Stops.forEach((innerItem: any) => {
-                                const obj = res[1].data.filter((item:any) => innerItem.StopName['Zh_tw'] === item.StopName['Zh_tw'])[0]
-                                let busStatus = ""
-                                switch(obj.StopStatus){
-                                    case 0:
-                                        if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
-                                            busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
-                                        }else{
-                                            if(obj.EstimateTime){
-                                                const hr = Math.floor(obj.EstimateTime / 3600)
-    
-                                                const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
-    
-                                                const carry = Math.floor((minutes+Math.floor(min)) / 60)
-    
-                                                busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
-                                            } else {
-                                                // unknown error
-                                                busStatus = "不明";
-                                            }
-                                        }
-                                        break;
-                                    case 1: 
-                                        if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
-                                            busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
-                                        }else{
-                                            if(obj.EstimateTime){
-                                                const hr = Math.floor(obj.EstimateTime / 3600)
-    
-                                                const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
-    
-                                                const carry = Math.floor((minutes+Math.floor(min)) / 60)
-    
-                                                busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
+                                            
+                                            
+                                            break;
+                                        case 1: 
+                                            if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
+                                                busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
                                             }else{
-                                                busStatus = "尚未發車";
+                                                if(obj.EstimateTime){
+                                                    const hr = Math.floor(obj.EstimateTime / 3600)
+        
+                                                    const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
+        
+                                                    const carry = Math.floor((minutes+Math.floor(min)) / 60)
+        
+                                                    busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
+                                                }else{
+                                                    busStatus = "尚未發車";
+                                                }
                                             }
-                                        }
-                                        break;
-                                    case 2:
-                                        busStatus = "交管不停靠";
-                                        break;
-                                    case 3:
-                                        busStatus = "末班車已過";
-                                        break;
-                                    case 4:
-                                        busStatus = "今日不營運";
-                                        break;
-                                }
-                                maximunGoStops.push({name: innerItem.StopName['Zh_tw'], status: busStatus})
-                            })
+                                            break;
+                                        case 2:
+                                            busStatus = "交管不停靠";
+                                            break;
+                                        case 3:
+                                            busStatus = "末班車已過";
+                                            break;
+                                        case 4:
+                                            busStatus = "今日不營運";
+                                            break;
+                                    }
+                                    maximunBackStops.push({name: innerItem.StopName['Zh_tw'], status: busStatus})
+                                })
+                            }
+                        } else if(item.Direction === 0) {
+                            if(maximunGoStops.length<item.Stops.length){
+                                item.Stops.forEach((innerItem: any) => {
+                                    const obj = res[1].data.filter((item:any) => innerItem.StopName['Zh_tw'] === item.StopName['Zh_tw'])[0]
+                                    let busStatus = ""
+                                    switch(obj.StopStatus){
+                                        case 0:
+                                            if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
+                                                busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
+                                            }else{
+                                                if(obj.EstimateTime){
+                                                    const hr = Math.floor(obj.EstimateTime / 3600)
+        
+                                                    const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
+        
+                                                    const carry = Math.floor((minutes+Math.floor(min)) / 60)
+        
+                                                    busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
+                                                } else {
+                                                    // unknown error
+                                                    busStatus = "不明";
+                                                }
+                                            }
+                                            break;
+                                        case 1: 
+                                            if(nearStopArray.indexOf(innerItem.StopName['Zh_tw']) !== -1 && res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].Direction === 1){
+                                                busStatus = res[2].data[nearStopArray.indexOf(innerItem.StopName['Zh_tw'])].A2EventType === 0 ? '離站中' : '進站中'
+                                            }else{
+                                                if(obj.EstimateTime){
+                                                    const hr = Math.floor(obj.EstimateTime / 3600)
+        
+                                                    const min = Math.floor((obj.EstimateTime - 3600*hr) / 60)
+        
+                                                    const carry = Math.floor((minutes+Math.floor(min)) / 60)
+        
+                                                    busStatus = `${hour+hr+carry} : ${minutes+min-carry*60<10 ? 0: ''}${minutes+min-carry*60}`;
+                                                }else{
+                                                    busStatus = "尚未發車";
+                                                }
+                                            }
+                                            break;
+                                        case 2:
+                                            busStatus = "交管不停靠";
+                                            break;
+                                        case 3:
+                                            busStatus = "末班車已過";
+                                            break;
+                                        case 4:
+                                            busStatus = "今日不營運";
+                                            break;
+                                    }
+                                    maximunGoStops.push({name: innerItem.StopName['Zh_tw'], status: busStatus})
+                                })
+                            }
                         }
-                    }
+                    })
+                    setGoStops(maximunGoStops);
+                    setBackStops(maximunBackStops);
+                    addLoading(false)
                 })
-                setGoStops(maximunGoStops);
-                setBackStops(maximunBackStops);
-                
-                addLoading(false)
             }catch(err){
                 addLoading(false)
 
@@ -184,6 +198,7 @@ const TransportationPage: NextPage = () => {
         )
     }, [search])
     const renderArray = direction===0 ? goStops : backStops
+    console.log('renderStops', renderArray);
     const stopLength = renderArray.length
     return(
         <Layout pageTitle={`景點交通`} description={"全台觀光景點報你知，交通餐飲旅宿通通有！"} previewImage={"/images/preview_image_homepage.png"}>

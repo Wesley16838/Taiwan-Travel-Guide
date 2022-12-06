@@ -1,7 +1,7 @@
 
 import styles from './Buttons.module.scss';
 import { ButtonProps } from '../../types/components'
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const Buttons = ({title, type, imagePath, imageAlt, backgroundColor, ariaLabel, onClick, disable=false}: ButtonProps) => {
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>): void  => {
@@ -14,7 +14,7 @@ const Buttons = ({title, type, imagePath, imageAlt, backgroundColor, ariaLabel, 
                 <div className={styles['image-container']}>
                     <Image
                         src={imagePath}
-                        alt={imageAlt}
+                        alt={imageAlt || "ButtonImage"}
                         layout={'fill'}
                         objectFit={'cover'}
                     />

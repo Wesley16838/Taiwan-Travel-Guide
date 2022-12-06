@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Router from 'next/router'
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { SearchState, SearchBusState } from '../../types/states'
 import Inputboxs from '../inputbox/inputbox'
 import Buttons from '../buttons/buttons'

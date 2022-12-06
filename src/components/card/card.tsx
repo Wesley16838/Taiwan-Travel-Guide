@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { CardProps } from '../../types/components'
 import Buttons from '../buttons/buttons'
 import styles from './Card.module.scss'
@@ -31,7 +31,7 @@ const Card= ({type, name, imagePath, onClick, description, location, imageAlt, p
     return(
         <div className={`${styles[`container__${type}`]}`} onClick={() => handleOnClickSmall()}>
             <div className={styles['image-container']}>
-                <Image src={encodeURI(imagePath)} alt={imageAlt} layout={'fill'} objectFit={'cover'} quality={50}/>
+                <Image src={encodeURI(imagePath)} alt={imageAlt || "CardImage"} layout={'fill'} objectFit={'cover'} quality={50}/>
             </div>
             <div className={styles.info}>
                 <h3 className={styles.title}>

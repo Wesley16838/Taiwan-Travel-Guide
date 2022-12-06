@@ -1,5 +1,5 @@
 import Links from '../links/links'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import logoPic from '../../../public/images/logo.png'
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react'

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { DropDownProps, DataItemType } from '../../types/components'
 import styles from './Dropdown.module.scss'
 import dropdownIcon from '../../../public/images/dropdown_icon.png'

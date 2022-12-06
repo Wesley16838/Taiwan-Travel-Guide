@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import Buttons from '../buttons/buttons'
 import { ModalProps } from '../../types/components'
 import closeIcon from '../../../public/images/close_icon.png'
@@ -29,8 +29,10 @@ const Modal = ({show, index, title, description, time, ticket, location, phoneNu
         <div className={styles['background-cover']}>
             <div className={styles['modal-container']}>
                 <div className={styles['info-wrapper']}>
+                    <div style={{height: 459, width: "100%"}}>
+                        <Image src={typeof imagePath === 'string' ? imagePath : imagePath[`PictureUrl${order+1}`]} height={459} width={612} alt={imageAlt} objectFit="contain" layout={"responsive"} />
+                    </div>
                     
-                    <Image src={typeof imagePath === 'string' ? imagePath : imagePath[`PictureUrl${order+1}`]} alt={imageAlt} width={612} height={459} layout={"responsive"}/>
                   
                     {
                         (typeof imagePath !== 'string' && imageArray.length/2 > 1) &&

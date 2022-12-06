@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import Router, { useRouter } from 'next/router'
@@ -10,7 +10,7 @@ import Card from '../../components/card/card'
 import Modal from '../../components/modal/modal'
 import Paginations from '../../components/pagination/pagination'
 import styles from '../../../styles/Page.module.scss'
-import API from '../../api' // remove later
+import API, { GetAuthorizationHeader } from '../../api' // remove later
 import { postcal, CityData } from '../../constants'
 import { useTourisms } from "../../context/tourismProvider"; //Activity
 // import { useFetch } from '../../hooks/usefetch'
@@ -39,32 +39,50 @@ const ScenicspotSearchPage: NextPage = () => {
     useEffect(()=> {
         const loadData = () => {
             try{ 
-                if(cityLength > 1){
-                    let promises = (city as string).split(' ').map(async obj => {
-                        return await API.get( encodeURI(`/${category}${obj && `/${obj}`}?${keyword ? `$filter=contains(Name,'${keyword}')&` : ''}$format=JSON`));
-                    })
-                    addLoading(true)
-                    Promise.all(promises)
-                    .then((data) => {
-                        const newArray: any[] = []
-                        data.forEach((item: any) => {
-                            newArray.push(...item.data)
-                        }) 
-                        addScenicspots(city as string, newArray as [])
-                        addLoading(false)
-                    })
-                } else if(cityLength === 1){
-                    addLoading(true)
-                    API.get( encodeURI(`/${category}${(city && city !== 'all') ? `/${city}` : ''}?${keyword ? `$filter=contains(Name,'${keyword}')&` : ''}$format=JSON`))
-                    .then((data: any) => {
-                        if(category ==='ScenicSpot'){
-                            addScenicspots(city as string, data.data)
-                        } else {
-                            addActivities(city as string, data.data)
-                        }
-                        addLoading(false)
-                    })   
-                }
+                GetAuthorizationHeader()
+                .then((token: any) => {
+                    if(cityLength > 1){
+                        let promises = (city as string).split(' ').map(async obj => {
+                            return await API.get(
+                                encodeURI(`/${category}${obj && `/${obj}`}?${keyword ? `$filter=contains(ScenicSpotName,'${keyword}')&` : ''}$format=JSON`),
+                                {
+                                    headers: {
+                                        "authorization": "Bearer " + token,
+                                    }
+                                }
+                            );
+                        })
+                        addLoading(true)
+                        Promise.all(promises)
+                        .then((data) => {
+                            const newArray: any[] = []
+                            data.forEach((item: any) => {
+                                newArray.push(...item.data)
+                            }) 
+                            addScenicspots(city as string, newArray as [])
+                            addLoading(false)
+                        })
+                    } else if(cityLength === 1){
+                        addLoading(true)
+                        API.get( 
+                            encodeURI(`/${category}${(city && city !== 'all') ? `/${city}` : ''}?${keyword ? `$filter=contains(ScenicSpotName,'${keyword}')&` : ''}$format=JSON`),
+                            {
+                                headers: {
+                                    "authorization": "Bearer " + token,
+                                }
+                            }
+                        )
+                        .then((data: any) => {
+                            console.log('data,', data)
+                            if(category ==='ScenicSpot'){
+                                addScenicspots(city as string, data.data)
+                            } else {
+                                addActivities(city as string, data.data)
+                            }
+                            addLoading(false)
+                        })   
+                    }
+                })
             }catch(err){
                 addLoading(false)
 
@@ -128,7 +146,7 @@ const ScenicspotSearchPage: NextPage = () => {
                     index={showModal.index} 
                     onClick={(val: number) => handleOnCardClick(val)}
                     onCancel={()=> setShowModal({...showModal, show: false})}
-                    title={showModal.data.Name}
+                    title={category ==='ScenicSpot' ? showModal.data.ScenicSpotName : showModal.data.ActivityName}
                     description={showModal.data.Description ? showModal.data.Description: showModal.data.DescriptionDetail}
                     time={category ==='ScenicSpot' ? showModal.data.OpenTime ? showModal.data.OpenTime : '--' : `${format(Date.parse(showModal.data.StartTime), 'yyyy/MM/dd')} - ${format(Date.parse(showModal.data.EndTime), 'yyyy/MM/dd')}`} 
                     ticket={category ==='ScenicSpot' ? `${showModal.data.TicketInfo ? showModal.data.TicketInfo : '--'}` : `${showModal.data.Charge ? showModal.data.Charge : '--'}`}  
@@ -166,15 +184,15 @@ const ScenicspotSearchPage: NextPage = () => {
                                         activities.listing.slice((pages - 1)*20, (pages*20)).map((activity: any, index: number) => {
                                             return(
                                                 <Card 
-                                                key={activity.Name + ((pages - 1)*20 + index)}
-                                                onClick={() => handleOnCardClick((pages - 1)*20 + index)} 
-                                                type={'small'} 
-                                                name={activity.Name} 
-                                                description={activity.DescriptionDetail} 
-                                                location={`${activity.Location}`} 
-                                                imagePath={activity.Picture.PictureUrl1 ? activity.Picture.PictureUrl1 : "/images/no_image_available.png"} 
-                                                imageAlt={activity.Picture.PictureDescription1 !== 0 ? activity.Picture.PictureDescription1 : "Activity Image"}
-                                            />
+                                                    key={activity.ActivityName  + ((pages - 1)*20 + index)}
+                                                    onClick={() => handleOnCardClick((pages - 1)*20 + index)} 
+                                                    type={'small'} 
+                                                    name={activity.ActivityName} 
+                                                    description={activity.DescriptionDetail} 
+                                                    location={`${activity.Location}`} 
+                                                    imagePath={activity.Picture.PictureUrl1 ? activity.Picture.PictureUrl1 : "/images/no_image_available.png"} 
+                                                    imageAlt={activity.Picture.PictureDescription1 !== 0 ? activity.Picture.PictureDescription1 : "Activity Image"}
+                                                />
                                             )
                                         })
                                         :
@@ -182,10 +200,10 @@ const ScenicspotSearchPage: NextPage = () => {
                                             const areaName = scenicspot['ZipCode'] ? postcal.get(scenicspot.ZipCode.slice(0, 3)) : [""]
                                             return(
                                                 <Card 
-                                                key={scenicspot.Name + ((pages - 1)*20 + index)}
+                                                key={scenicspot.ScenicSpotName + ((pages - 1)*20 + index)}
                                                 onClick={() => handleOnCardClick((pages - 1)*20 + index)} 
                                                 type={'small'} 
-                                                name={scenicspot.Name} 
+                                                name={scenicspot.ScenicSpotName} 
                                                 description={scenicspot.DescriptionDetail} 
                                                 location={`${scenicspot.City? `${scenicspot.City} ${areaName && areaName[0]}` : scenicspot.Address}`} 
                                                 imagePath={scenicspot.Picture.PictureUrl1 ? scenicspot.Picture.PictureUrl1 : "/images/no_image_available.png"} 
