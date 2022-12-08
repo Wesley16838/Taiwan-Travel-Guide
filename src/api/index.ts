@@ -9,7 +9,6 @@ export default axios.create({
 export async function GetAuthorizationHeader() {
     try{
         const token = getWithExpiry('token');
-        console.log('token,', token)
         if(token) return token;
         const parameter: any = {
             grant_type:"client_credentials",
@@ -23,9 +22,7 @@ export async function GetAuthorizationHeader() {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
-        console.log('res,', res)
         const new_token = res.data.access_token
-        console.log('new_token,', new_token)
         setWithExpiry('token', new_token, 86400)
         return new_token;
     }catch(err) {
