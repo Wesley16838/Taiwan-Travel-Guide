@@ -2,7 +2,7 @@ import axios from "axios";
 import { getWithExpiry, setWithExpiry } from "../utils/helper";
 
 export default axios.create({
-    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism',
+    baseURL: 'https://tdx.transportdata.tw/api/basic/v2/Tourism/',
     responseType: "json",
   });
 
